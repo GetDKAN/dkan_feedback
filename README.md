@@ -11,7 +11,7 @@ DKAN Feedback is a module allow users and visitors to add feedback on the publis
 `dkan_feedback.make` file. This includes
 [rate](https://www.drupal.org/project/rate) and related modules
 ([Voting API](https://www.drupal.org/project/votingapi) for
-the content moderation features, [Captcha](https://www.drupal.org/project/captcha) captcha to avoid spam feedback.)
+the up / down voting content, [Captcha](https://www.drupal.org/project/captcha) captcha to avoid spam feedback.)
 
 ## Installation
 
