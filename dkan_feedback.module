@@ -1,0 +1,281 @@
+<?php
+/**
+ * @file
+ * Code for the DKAN Feedback feature.
+ */
+
+include_once 'dkan_feedback.features.inc';
+
+/**
+ * Implements hook_menu().
+ */
+function dkan_feedback_menu() {
+  $items['feedback/add'] = [
+    'title' => 'Add Feedback',
+    'description' => 'Add a Feedback to content.',
+    'page callback' => 'dkan_feedback_add_page',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+    'menu_name' => 'main-menu',
+    'weight' => 100,
+  ];
+
+  $items['node/%/feedback'] = [
+    'title' => 'Add Feedback',
+    'description' => 'Add a Feedback to content.',
+    'page callback' => 'dkan_feedback_add_page',
+    'page arguments' => [1],
+    'access callback' => 'dkan_feedback_access_tab',
+    'access arguments' => [1],
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 100,
+  ];
+
+  return $items;
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function dkan_feedback_menu_local_tasks_alter(&$data, $router, $root_path) {
+  // Add an action linking to feedback/add to all pages.
+  if ($root_path == 'feedback') {
+    $data['actions']['output'][] = array(
+      '#theme' => 'menu_local_task',
+      '#link' => array(
+        'title' => t('Add Feedback'),
+        'href' => 'feedback/add',
+        'localized_options' => array(
+          'attributes' => array(
+            'title' => t('Add Feedback'),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/**
+ * Access callback function for "Add Feedback" menu tab.
+ */
+function dkan_feedback_access_tab($nid) {
+  $node = node_load($nid);
+  if ($node) {
+    return $node->type != 'feedback';
+  }
+  return TRUE;
+}
+
+/**
+ * Callback for 'node/%/feedback'.
+ */
+function dkan_feedback_add_page($nid) {
+  module_load_include('inc', 'node', 'node.pages');
+  global $user;
+
+  $node = (object) [
+    'title' => '',
+    'type' => 'feedback',
+    'language' => LANGUAGE_NONE,
+  ];
+
+  if ($nid) {
+    $node->title = '';
+    $node->field_feedback_entity_reference['und'][0]['target_id'] = $nid;
+  }
+
+  $form = drupal_get_form('feedback_node_form', $node);
+  $form['og_group_ref']['#access'] = FALSE;
+
+  return $form;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function dkan_feedback_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  if ($form_id == 'feedback_node_form') {
+    // Prevent Anonymous users from accacing the "Moderation state" checkbox set
+    // later via workbench_moderation.
+    $form['revision_information']['#access'] = FALSE;
+
+    if (!$uid) {
+      $form['actions']['submit']['#access'] = TRUE;
+      $form['actions']['preview']['#access'] = FALSE;
+    }
+
+    $not_og_ref_validate = function($value) {
+      return $value != 'og_form_group_reference_validate';
+    };
+    $form['#validate'] = array_filter($form['#validate'], $not_og_ref_validate);
+    $form['actions']['submit']['#submit'][] = 'dkan_feedback_submit';
+  }
+}
+
+
+/**
+ * Node feedback submit callback.
+ */
+function dkan_feedback_submit(&$form, &$form_state, $form_id) {
+  $_GET['destination'] = '/feedback';
+}
+
+
+/**
+ * Implements hook_node_presave().
+ */
+function dkan_feedback_node_presave($node) {
+  // Do not override the user once node is created.
+  if ($node->type == 'feedback' && $node->is_new) {
+    global $user;
+    $node->uid = $user->uid;
+    if (!empty($node->field_feedback_entity_reference)) {
+      $ref = node_load($node->field_feedback_entity_reference['und'][0]['target_id']);
+      $node->og_group_ref = $ref->og_group_ref;
+    }
+  }
+}
+
+
+/**
+ * Implements hook_rate_templates().
+ */
+function dkan_feedback_rate_templates() {
+  $templates = array();
+  $templates['feedback'] = new stdClass();
+  $templates['feedback']->value_type = 'points';
+  $templates['feedback']->options = array(
+    array(1, '+1'),
+    array(-1, '-1'),
+  );
+  $templates['feedback']->theme = 'rate_template_feedback';
+  $templates['feedback']->customizable = FALSE;
+  $templates['feedback']->translate = TRUE;
+  $templates['feedback']->template_title = t('Feedback up / down');
+
+  return $templates;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function dkan_feedback_theme() {
+  $theme = array();
+  $theme['rate_template_feedback']  = [
+    'variables' => [
+      'links' => NULL,
+      'results' => NULL,
+      'mode' => NULL,
+      'just_voted' => FALSE,
+      'content_type' => NULL,
+      'content_id' => NULL,
+      'display_options' => NULL,
+    ],
+    'template' => 'rate-template-feedback',
+    'path' => drupal_get_path('module', 'dkan_feedback') . '/templates/feedback',
+  ];
+
+  $theme['feedback_profile_badge']  = [
+    'variables' => [
+      'path' => drupal_get_path('module', 'dkan_feedback') . '/templates/feedback',
+    ],
+  ];
+  return $theme;
+}
+
+/**
+ * Theme function for feedback profile badge.
+ */
+function theme_feedback_profile_badge($variables) {
+  $output = "<img src='$variables[path]/default-person.png' />";
+  return $output;
+}
+
+/**
+ * Preprocess function for the feedback template.
+ */
+function dkan_feedback_preprocess_rate_template_feedback(&$variables) {
+  drupal_add_css('sites/all/modules/contrib/rate/templates/feedback/feedback.css ', 'module', 'inline');
+  extract($variables);
+  $up_classes = 'fa fa-angle-up';
+  $down_classes = 'fa fa-angle-down';
+  if (isset($results['user_vote'])) {
+    switch ($results['user_vote']) {
+      case $links[0]['value']:
+        $up_classes .= ' rate-voted';
+        break;
+
+      case $links[1]['value']:
+        $down_classes .= ' rate-voted';
+        break;
+    }
+  }
+  $variables['up_button'] = theme('rate_button', [
+    'href' => $links[0]['href'],
+    'class' => $up_classes,
+  ]);
+  $variables['down_button'] = theme('rate_button', [
+    'href' => $links[1]['href'],
+    'class' => $down_classes,
+  ]);
+  if ($results['rating'] > 0) {
+    $score = '+' . $results['rating'];
+    $score_class = 'positive';
+  }
+  elseif ($results['rating'] < 0) {
+    $score = $results['rating'];
+    $score_class = 'negative';
+  }
+  else {
+    $score = 0;
+    $score_class = 'neutral';
+  }
+  $variables['score'] = $score;
+  $variables['score_class'] = $score_class;
+
+  $info = array();
+  if ($mode == RATE_CLOSED) {
+    $info[] = t('Voting is closed.');
+  }
+  if ($mode != RATE_COMPACT && $mode != RATE_COMPACT_DISABLED) {
+    if (isset($results['user_vote'])) {
+      $info[] = t("You voted '@option'.", [
+        '@option' => $results['user_vote'] == 1 ? $links[0]['text'] : $links[1]['text'],
+      ]);
+    }
+  }
+  $variables['info'] = implode(' ', $info);
+}
+
+
+/**
+ * Implements hook_preprocess_THEME().
+ */
+function dkan_feedback_preprocess_views_view_table(&$vars) {
+  if ($vars['view']->name == "feedback") {
+    $vars['header'] = array();
+    foreach ($vars['field_classes']['picture'] as $key => $value) {
+      if ($vars['view']->result[$key]->node_uid != 0) {
+        $vars['field_classes']['picture'][$key] = $value . " authenticated-user";
+      }
+    }
+  }
+}
+/**
+ * Implements hook_workbench_moderation_states_next_alter().
+ *
+ */
+function dkan_feedback_workbench_moderation_states_next_alter(&$states, &$current_state, $context) {
+
+  // Make sure new feedback nodes moderation state is set to needs_review.
+  // We do have the default state for feedback content type set to needs_review.
+  // But this is needed for users that don't have the 'moderate content from
+  // draft to needs_review' permission.
+  if ($context['node']->type == 'feedback'
+    && !isset($context['node']->nid)
+    && empty($states)
+    && isset(workbench_moderation_states()['needs_review'])) {
+      $states = array('needs_review' => "Needs Review");
+    }
+}

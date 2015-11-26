@@ -1,0 +1,240 @@
+.rate-feedback-rating {
+
+  font-size: 24px;
+}
+
+
+.view-feedback .views-table td .rate-average.rate-widget-feedback {
+  text-align: center;
+}
+
+.rate-button.fa {
+  font-size: 48px;
+  color: #7f8181;
+  text-decoration: none;
+}
+
+.rate-button.fa:hover {
+  color: #0A77BD;
+}
+
+.page-feedback .view-feedback .views-field-title a {
+  font-size: 22px;
+  color: #000;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.page-feedback .view-feedback .views-field-title a:hover {
+  color: #0A77BD;
+}
+
+.page-feedback .view-feedback td.views-field-title {
+  width: 100%;
+}
+
+.page-feedback .view-feedback .feedback-info a {
+  color: #1D6FB7;
+  font-size: 16px;
+}
+.view-feedback .views-table td {
+  vertical-align: middle;
+  background-color: transparent;
+  border: none;
+}
+
+.view-feedback .views-table tr.odd,
+.view-feedback .views-table tr.even {
+  background-color: transparent;
+}
+
+.view-feedback .views-table .rate-info{
+  display: none;
+}
+
+.view-feedback .views-field-edit-node a, .comment-edit a {
+  text-indent: 100%;
+  white-space: nowrap;
+  font-size: 0px;
+  text-decoration: none;
+}
+
+.node-type-feedback .comment-delete, .comment-edit, .comment-reply {
+  display: inline-block;
+}
+
+.view-feedback .views-field-edit-node a:before, .comment-edit a:before {
+  content: "\f044";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.view-feedback .views-field-edit-node a:hover, .comment-edit a:hover {
+  text-decoration: none;
+}
+
+.views-field-delete-node a, .comment-delete a {
+  text-indent: 100%;
+  white-space: nowrap;
+  font-size: 0px;
+  text-decoration: none;
+}
+
+.views-field-delete-node a:before, .comment-delete a:before {
+  content: "\f014";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.views-field-delete-node a:hover, .comment-delete a:hover {
+  text-decoration: none;
+}
+
+.comment-reply a {
+  text-indent: 100%;
+  white-space: nowrap;
+  font-size: 0px;
+  text-decoration: none;
+}
+
+.comment-reply a:before {
+  content: "\f112";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.comment-reply a:hover {
+  text-decoration: none;
+}
+
+.view-feedback .table-responsive > .table > tbody > tr > td {
+  white-space: normal;
+}
+
+.view-feedback .table-responsive > .table > tbody > tr > td:first-child {
+  width: 8%;
+  line-height: 1em;
+}
+
+.view-feedback .views-exposed-form label {
+  display: inline-block;
+}
+.view-feedback .views-exposed-form .views-exposed-widget .form-submit {
+  margin-top: 24px;
+}
+
+.view-feedback .views-table .views-field-edit-node, .comment-edit,
+.view-feedback .views-table .views-field-delete-node, .comment-delete {
+  vertical-align: top;
+}
+
+.view-feedback .rate-voted {
+  color: #0A77BD;
+}
+
+.comment .field-name-comment-body {
+  display: inline-block;
+  width: 90%;
+  float: right;
+}
+
+.comment .field-name-comment-body p {
+  margin-top: 11px;
+}
+
+.comment .rate-widget {
+  display: inline-block;
+  width: 10%;
+  float: left;
+  text-align: center;
+}
+
+.comment .links {
+  clear: both;
+  text-align: right;
+}
+
+.page-comment-reply .comment .links li {
+  display: inline-block;
+}
+
+.comment .rate-info {
+  display: none;
+}
+
+.pane-feedback-panel-pane-2 .view-feedback .views-field-title a {
+  color: #0a77bd;
+}
+
+.pane-feedback-panel-pane-2 .view-feedback .views-field-title a:hover {
+  color: #002245;
+}
+
+.pane-feedback-panel-pane-2 .view-feedback .views-field-title a:hover .feedback-comments {
+  color: #002245;
+}
+
+.pane-feedback-panel-pane-2 > h2.pane-title {
+  font-size: 18px;
+}
+
+.pane-feedback-panel-pane-2 div.pane-content {
+  box-shadow: none;
+  padding: 0;
+}
+
+.pane-feedback-panel-pane-2 .view-feedback .views-field-title a {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 36px;
+}
+
+.pane-feedback-panel-pane-2 .views-field-title .feedback-comments {
+  float: right;
+  font-size: 11px;
+  vertical-align: middle;
+  color: #737272;
+}
+
+.pane-feedback-panel-pane-2 .views-field-title .feedback-comments i {
+  margin: 0 0.5em;
+}
+
+.pane-feedback-panel-pane-2 .views-field-title .field-content {
+  width: 100%;
+}
+
+.pane-feedback-panel-pane-2 .views-field-title .field-content a {
+  width: 100%;
+}
+
+.feedback-submit-pane div.pane-content {
+  padding-top: 0;
+  margin-bottom: 10px;
+  text-align: center;
+  box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.3);
+}
+
+.authenticated-user {
+  display: inline-block;
+  position: relative;
+}
+
+.authenticated-user:after {
+  content: " ";
+  background-image: url("badge.png");
+  position: absolute;
+  bottom: 0;
+  right: 8px;
+  width: 14px;
+  height: 24px;
+}

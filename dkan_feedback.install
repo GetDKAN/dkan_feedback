@@ -1,0 +1,43 @@
+<?php
+/**
+ * @file
+ * Installation of dkan_feedback.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function dkan_feedback_install() {
+  _dkan_feedback_type_default_terms();
+}
+
+/**
+ * Create some default feedback type terms.
+ */
+function _dkan_feedback_type_default_terms() {
+  features_revert(array('dkan_feedback' => array('taxonomy')));
+  $vocab = taxonomy_vocabulary_machine_name_load('feedback_type');
+
+  $terms = [
+    'Report a problem with the site',
+    'Suggest a new feature for the site',
+    'Report a problem with the data',
+    'Suggest improvements/changes for the data',
+    'Request data to appear here',
+    'Share how you\'re using the data',
+    'Media Inquiries',
+    'Other',
+  ];
+
+  $return = array();
+  foreach ($terms as $term) {
+    $term = (object) [
+      'name' => $term,
+      'vid' => $vocab->vid,
+    ];
+
+    taxonomy_term_save($term);
+    $return[$term->name] = $term;
+  }
+  return $return;
+}
