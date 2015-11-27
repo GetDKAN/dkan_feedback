@@ -246,7 +246,7 @@ function dkan_feedback_views_default_views() {
   $handler->display->display_options['fields']['picture']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['picture']['alter']['text'] = '[picture]';
   $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['picture']['empty'] = '<img src=\'sites/all/modules/dkan/dkan_feedback/templates/feedback/default-person.png\' />';
+  $handler->display->display_options['fields']['picture']['empty'] = theme('feedback_profile_badge');
   $handler->display->display_options['fields']['picture']['image_style'] = 'thumbnail';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
