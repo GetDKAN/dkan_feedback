@@ -195,7 +195,7 @@ function theme_feedback_profile_badge($variables) {
  * Preprocess function for the feedback template.
  */
 function dkan_feedback_preprocess_rate_template_feedback(&$variables) {
-  drupal_add_css(drupal_get_path('module', 'dkan_feedback') . '/templates/feedback/feedback.css', 'module', 'inline');
+  drupal_add_css(drupal_get_path('module', 'dkan_feedback') . '/templates/feedback/feedback.css');
   extract($variables);
   $up_classes = 'fa fa-angle-up';
   $down_classes = 'fa fa-angle-down';
