@@ -100,7 +100,7 @@ function dkan_feedback_field_default_field_instances() {
     'bundle' => 'feedback',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'If this feedback is related to a dataset or resource, type its name here.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -302,6 +302,7 @@ function dkan_feedback_field_default_field_instances() {
   t('Feedback');
   t('Feedback Type');
   t('Groups audience');
+  t('If this feedback is related to a dataset or resource, type its name here.');
   t('Tags');
 
   return $field_instances;
