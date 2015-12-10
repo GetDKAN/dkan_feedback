@@ -216,7 +216,7 @@ function dkan_feedback_views_default_views() {
   $handler->display->display_options['relationships']['votingapi_cache']['votingapi'] = array(
     'value_type' => 'points',
     'tag' => 'feedback',
-    'function' => 'count',
+    'function' => 'sum',
   );
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Vote results: Value */
@@ -237,17 +237,6 @@ function dkan_feedback_views_default_views() {
   $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['uid']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['uid']['link_to_user'] = FALSE;
-  /* Field: User: Picture */
-  $handler->display->display_options['fields']['picture']['id'] = 'picture';
-  $handler->display->display_options['fields']['picture']['table'] = 'users';
-  $handler->display->display_options['fields']['picture']['field'] = 'picture';
-  $handler->display->display_options['fields']['picture']['relationship'] = 'uid';
-  $handler->display->display_options['fields']['picture']['label'] = '';
-  $handler->display->display_options['fields']['picture']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['picture']['alter']['text'] = '[picture]';
-  $handler->display->display_options['fields']['picture']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['picture']['empty'] = theme('feedback_profile_badge');
-  $handler->display->display_options['fields']['picture']['image_style'] = 'thumbnail';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -300,9 +289,10 @@ function dkan_feedback_views_default_views() {
   $handler->display->display_options['sorts']['value']['table'] = 'votingapi_cache';
   $handler->display->display_options['sorts']['value']['field'] = 'value';
   $handler->display->display_options['sorts']['value']['relationship'] = 'votingapi_cache';
+  $handler->display->display_options['sorts']['value']['group_type'] = 'count_distinct';
   $handler->display->display_options['sorts']['value']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['value']['expose']['label'] = 'Most Voted';
-  $handler->display->display_options['sorts']['value']['coalesce'] = 0;
+  $handler->display->display_options['sorts']['value']['coalesce'] = 1;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -396,7 +386,7 @@ function dkan_feedback_views_default_views() {
   /* Display: Dataset pane */
   $handler = $view->new_display('panel_pane', 'Dataset pane', 'panel_pane_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Feedback Given';
+  $handler->display->display_options['title'] = 'Related Feedback';
   $handler->display->display_options['defaults']['use_more'] = FALSE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;
   $handler->display->display_options['defaults']['use_more_always'] = FALSE;

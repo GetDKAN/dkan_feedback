@@ -53,6 +53,15 @@ function dkan_feedback_menu_local_tasks_alter(&$data, $router, $root_path) {
       ),
     );
   }
+  $node = menu_get_object();
+  if (isset($node->type) && $node->type == 'feedback') {
+    foreach($data['tabs'][0]['output'] as $key => $value) {
+      if ($value['#link']['path'] == 'node/%/members') {
+        unset($data['tabs'][0]['output'][$key]);
+        $data['tabs'][0]['output'] = array_values($data['tabs'][0]['output']);
+      }
+    }
+  }
 }
 
 /**
@@ -254,9 +263,9 @@ function dkan_feedback_preprocess_rate_template_feedback(&$variables) {
 function dkan_feedback_preprocess_views_view_table(&$vars) {
   if ($vars['view']->name == "feedback") {
     $vars['header'] = array();
-    foreach ($vars['field_classes']['picture'] as $key => $value) {
+    foreach ($vars['field_classes']['title'] as $key => $value) {
       if ($vars['view']->result[$key]->node_uid != 0) {
-        $vars['field_classes']['picture'][$key] = $value . " authenticated-user";
+        $vars['field_classes']['title'][$key] = $value . " authenticated-user";
       }
     }
   }

@@ -78,7 +78,7 @@ function dkan_feedback_defaultconfig_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'og_ui',
           'settings' => array(),
           'type' => 'og_list_default',
