@@ -52,7 +52,7 @@ function dkan_feedback_defaultconfig_field_default_fields() {
               'status' => TRUE,
             ),
             'views-select-list' => array(
-              'status' => 1,
+              'status' => 0,
             ),
           ),
           'membership_type' => 'og_membership_type_default',

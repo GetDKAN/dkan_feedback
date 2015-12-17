@@ -32,13 +32,14 @@ function dkan_feedback_field_group_info() {
     ),
     'format_type' => 'table',
     'format_settings' => array(
-      'label' => 'Feedback',
+      'formatter' => '',
       'instance_settings' => array(
-        'label' => 'hide',
+        'label' => TRUE,
         'desc' => '',
         'first_column' => '',
         'second_column' => '',
-        'cells' => 'empty',
+        'cells' => FALSE,
+        'classes' => 'group-feedback field-group-table',
       ),
     ),
   );

@@ -24,6 +24,7 @@ dependencies[] = views_content
 stylesheets[all][] = templates/feedback/feedback.css
 features[captcha_points][] = feedback_node_form
 features[ctools][] = captcha:captcha:1
+features[ctools][] = field_group:field_group:1
 features[ctools][] = strongarm:strongarm:1
 features[ctools][] = views:views_default:3.0
 features[defaultconfig][] = field_default_fields:node-feedback-og_group_ref
