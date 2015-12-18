@@ -5,42 +5,116 @@ default:
      default:
         contexts:
           - FeatureContext
-          - Drupal\DrupalExtension\Context\DrupalContext
+          - FeedbackContext
+          # Load the generic DKAN context
+          - Drupal\DKANExtension\Context\DKANContext
+          # Load DKAN Groups functionality
+          - Drupal\DKANExtension\Context\GroupContext
           - Drupal\DrupalExtension\Context\MinkContext
           - Drupal\DrupalExtension\Context\MessageContext
           - Drupal\DrupalExtension\Context\DrushContext
+          - Drupal\DKANExtension\Context\EntityStore
+          - Drupal\DKANExtension\Context\MailContext
+          - Drupal\DKANExtension\Context\PageContext
+          - Drupal\DKANExtension\Context\DatasetContext
+          - Drupal\DKANExtension\Context\SearchAPIContext:
+              search_forms:
+                feedback:
+                  form_css: '#views-exposed-form-feedback-page-1'
+                  form_field: 'edit-title'
+                  form_button: 'edit-submit-feedback'
+                  results_css: '.view-feedback'
+                  result_item_css: '.view-feedback .views-table tr'
+          - Drupal\DKANExtension\Context\ResourceContext
   gherkin:
     filters:
-      tags: ~@wip
+      tags: ~@fixme
   formatters:
-    pretty: true
+    pretty:
+      output_styles:
+        comment:    [default, default , [conceal]]
   extensions:
     Behat\MinkExtension:
+      base_url: http://127.0.0.1:8888
       selenium2: ~
       goutte: ~
+      # show_cmd: firefox %s
+      default_session: 'goutte'
+      javascript_session: 'selenium2'
+      # browser_name: chrome
     Drupal\DrupalExtension:
+      blackbox: ~
       drupal:
         drupal_root: %paths.base%/../../../../../../../webroot
+      drush: ~
       api_driver: 'drupal'
-      # @todo fixup these regions for use with new theme. Updated navigation only
+      # @todo fixup these regions for use on hhs
       region_map:
-        navigation: '.navigation-wrapper'
+        navigation: '.region-navigation'
         breadcrumb: '.breadcrumb'
         left_sidebar: '.panel-col-first'
         search_area: '.panel-col-last'
         dropdown_links: '.comment-main .links.inline.dropdown-menu'
         comment: '.comment-main'
-
+        posts: '.view-blog .view-content'
+        content: ".region-content"
+        toolbar: ".tabs--primary"
+        footer: "#footer"
+        header: "#header"
+        modal: "#modalContent"
+        left header: "#header-left"
+        right header: "#header-right"
+        right sidebar: "#column-right"
+        dashboards: ".view-data-dashboards table tbody"
+        navigation: '.navigation-wrapper'
+        primary tabs: '.tabs--primary'
+        group subscribe: '.group-subscribe-message'
+        group information: '.field-group-htabs-wrapper'
+        group datasets: '#node_group_full_group_tab_datasets'
+        group members: '#node_group_full_group_tab_members'
+        filter by resource format: '.facetapi-facet-field-resourcesfield-format'
+        filter by author: '.facetapi-facet-author'
+        filter by tag: '.facetapi-facet-field-tags'
+        social: '.pane-dkan-sitewide-dkan-sitewide-social'
+        other access: '.pane-dkan-sitewide-dkan-sitewide-other-access'
+        datasets: '.view-dkan-datasets'
+        user profile: '.pane-dkan-sitewide-profile-page-dkan-user-summary'
+        tabs: '.field-group-htabs-wrapper'
+        content: '.view-content'
+        user content: '.view-user-profile-search'
+        content search: '.form-item-query'
+        feedback_result_item: '.views-table tr td a'
+        dkan_workflow_tree: '.views-dkan-workflow-tree'
+      text:
+        log_out: "Log out"
+        log_in: "Log in"
       selectors:
         message_selector: '.alert'
         error_message_selector: '.alert.alert-error'
         success_message_selector: '.alert.alert-success'
-local-vm:
+local:
   extensions:
     Behat\MinkExtension:
-      base_url: http://dkan_workflow_test.local
-
-jenkins:
+      base_url: http://dkan.dev
+      selenium2:
+        wd_host: http://127.0.0.1:4444/wd/hub
+    Drupal\DrupalExtension:
+      drupal:
+        drupal_root: '/var/www/dkan/webroot'
+      drush:
+        root: '/var/www/dkan/webroot'
+docker:
   extensions:
     Behat\MinkExtension:
-      base_url: http://dkan_workflow_test.local
+      base_url: http://web
+      #base_url: http://data_starter.local
+      selenium2:
+        wd_host: http://browser:4444/wd/hub
+        #wd_host: http://192.168.10.1:4444/wd/hub
+        browser: chrome
+        #browser: firefox
+    Drupal\DrupalExtension:
+      drupal:
+        drupal_root: '/var/www/docroot'
+      drush:
+        root: '/var/www/docroot'
