@@ -1,0 +1,8 @@
+{
+  "require": {
+    "nucivic/dkanextension": "dev-hhs_implementation"
+  },
+  "config": {
+    "bin-dir": "bin/"
+  }
+}
