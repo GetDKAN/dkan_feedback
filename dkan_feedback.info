@@ -8,6 +8,7 @@ dependencies[] = comment
 dependencies[] = ctools
 dependencies[] = defaultconfig
 dependencies[] = dkan_dataset_groups
+dependencies[] = dkan_feedback_permissions
 dependencies[] = dkan_sitewide_panels
 dependencies[] = entityreference
 dependencies[] = features
