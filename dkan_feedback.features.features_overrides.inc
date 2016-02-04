@@ -11,6 +11,9 @@ function dkan_feedback_features_override_default_overrides() {
   // This code is only used for UI in features. Exported alters hooks do the magic.
   $overrides = array();
 
+  // Exported overrides for: field_base
+  $overrides["field_base.og_group_ref.settings|handler_settings|behaviors|views-select-list|status"] = 1;
+
   // Exported overrides for: page_manager_handlers
   $overrides["page_manager_handlers.node_view_panel_context.conf|display|content|new-f1e7011f-4d87-4c82-a8eb-fe43c08bf8eb"] = (object) array(
       'pid' => 'new-f1e7011f-4d87-4c82-a8eb-fe43c08bf8eb',
