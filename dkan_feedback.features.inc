@@ -27,6 +27,15 @@ function dkan_feedback_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_field_default_field_bases_alter().
+ */
+function dkan_feedback_field_default_field_bases_alter(&$data) {
+  if (isset($data['og_group_ref'])) {
+    $data['og_group_ref']['settings']['handler_settings']['behaviors']['views-select-list']['status'] = 1; /* WAS: 0 */
+  }
+}
+
+/**
  * Implements hook_default_page_manager_handlers_alter().
  */
 function dkan_feedback_default_page_manager_handlers_alter(&$data) {
