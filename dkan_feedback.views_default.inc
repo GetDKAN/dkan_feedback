@@ -290,6 +290,7 @@ function dkan_feedback_views_default_views() {
   $handler->display->display_options['sorts']['value']['field'] = 'value';
   $handler->display->display_options['sorts']['value']['relationship'] = 'votingapi_cache';
   $handler->display->display_options['sorts']['value']['group_type'] = 'count_distinct';
+  $handler->display->display_options['sorts']['value']['order'] = 'DESC';
   $handler->display->display_options['sorts']['value']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['value']['expose']['label'] = 'Most Voted';
   $handler->display->display_options['sorts']['value']['coalesce'] = 1;

@@ -134,6 +134,36 @@ Feature: Tests for the "Feedback" features.
     Then The feedback "Feedback 01" should be rated "-1"
 
   @api @javascript
+  Scenario: The feedback should be sorted by rating in descending order (default).
+     Given groups:
+      | title    |
+      | Group 01 |
+      | Group 02 |
+      | Group 03 |
+    And users:
+      | name     | role                                 | status |
+      | AUTH-DC  | Authenticated User, Data Contributor | 1      |
+      | AUTH     | Authenticated User                   | 1      |
+    And datasets:
+      | title      | author  | moderation | date created | published | publisher |
+      | Dataset 01 | AUTH-DC | published  | July 5, 2015 | yes       | Group 01  |
+      | Dataset 02 | AUTH-DC | published  | July 5, 2015 | yes       | Group 02  |
+      | Dataset 03 | AUTH-DC | published  | July 5, 2015 | yes       | Group 03  |
+    And a feedback_type term with the name "Test feedback type 1"
+    And a feedback_type term with the name "Test feedback type 2"
+    And a feedback_type term with the name "Test feedback type 3"
+    And feedback:
+      | title       | moderation | author | associated content | published | feedback type        | date created | rating |
+      | Feedback 01 | published  | AUTH   | Dataset 01         | yes       | Test feedback type 1 | July 5, 2015 | 1      |
+      | Feedback 02 | published  | AUTH   | Dataset 02         | yes       | Test feedback type 2 | July 6, 2015 | 2      |
+      | Feedback 03 | published  | AUTH   | Dataset 03         | yes       | Test feedback type 3 | July 7, 2015 | 3      |
+    And I am an anonymous user
+    When I go to "/feedback"
+    And I fill in "Title" with "Feedback"
+    And I press the "Apply" button
+    Then the ".views-table tr td > a" elements should be sorted in this order "Feedback 03 > Feedback 02 > Feedback 01"
+
+  @api @javascript
   Scenario: As a user, I should be able to sort by date in the Feedback page.
     Given groups:
       | title    |
