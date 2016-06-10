@@ -35,7 +35,7 @@ function dkan_feedback_permissions_user_default_permissions() {
   $permissions['delete any feedback content'] = array(
     'name' => 'delete any feedback content',
     'roles' => array(
-      'Site Manager' => 'Site Manager',
+      'site manager' => 'site manager',
       'administrator' => 'administrator',
       'editor' => 'editor',
     ),
@@ -56,7 +56,7 @@ function dkan_feedback_permissions_user_default_permissions() {
   $permissions['edit any feedback content'] = array(
     'name' => 'edit any feedback content',
     'roles' => array(
-      'Site Manager' => 'Site Manager',
+      'site manager' => 'site manager',
       'administrator' => 'administrator',
       'editor' => 'editor',
     ),

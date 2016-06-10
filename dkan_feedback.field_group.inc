@@ -8,7 +8,7 @@
  * Implements hook_field_group_info().
  */
 function dkan_feedback_field_group_info() {
-  $export = array();
+  $field_groups = array();
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -43,7 +43,11 @@ function dkan_feedback_field_group_info() {
       ),
     ),
   );
-  $export['group_feedback|node|feedback|default'] = $field_group;
+  $field_groups['group_feedback|node|feedback|default'] = $field_group;
 
-  return $export;
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Feedback');
+
+  return $field_groups;
 }
