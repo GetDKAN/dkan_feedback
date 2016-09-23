@@ -21,4 +21,3 @@ features[user_permission][] = delete any feedback content
 features[user_permission][] = delete own feedback content
 features[user_permission][] = edit any feedback content
 features[user_permission][] = edit own feedback content
-project path = sites/all/modules/dkan/dkan_feedback/modules
