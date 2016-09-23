@@ -301,3 +301,10 @@ function dkan_feedback_strongarm_alter(&$data) {
     }
   }
 }
+
+/**
+ * Implements hook_page_alter().
+ */
+function dkan_feedback_page_alter(&$page) {
+  drupal_add_css(drupal_get_path('module', 'dkan_feedback') . '/templates/feedback/feedback.css');
+}
