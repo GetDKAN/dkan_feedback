@@ -188,7 +188,7 @@ function dkan_feedback_strongarm() {
       'use_source_translation' => TRUE,
       'value_type' => 'points',
       'theme' => 'rate_template_feedback',
-      'css' => 'profiles/dkan/modules/dkan/dkan_feedback/templates/feedback/feedback.css',
+      'css' => 'sites/all/modules/dkan/dkan_feedback/templates/feedback/feedback.css',
       'translate' => TRUE,
     ),
   );

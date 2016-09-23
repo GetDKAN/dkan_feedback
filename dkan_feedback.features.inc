@@ -79,7 +79,7 @@ function dkan_feedback_default_page_manager_pages_alter(&$data) {
             'admin_title' => '',
             'title' => '',
             'body' => '<p>Don\'t see what you\'re looking for?</p>
-            <a href="/feedback/add" class="btn btn-primary btn-sm"><i class="fa fa-lg fa-"></i> Add Feedback</a>',
+                        <a href="/feedback/add" class="btn btn-primary btn-sm"><i class="fa fa-lg fa-"></i> Add Feedback</a>',
             'format' => 'full_html',
             'substitute' => TRUE,
           ),
@@ -96,8 +96,7 @@ function dkan_feedback_default_page_manager_pages_alter(&$data) {
           'locks' => array(),
           'uuid' => '263bb85d-b2bd-4d15-8042-6a1d6ae6f7a0',
         ); /* WAS: '' */
-    $data['datasets']->default_handlers['page_datasets_panel_context']->conf['display']->panels['contentmain'][0] = 'new-263bb85d-b2bd-4d15-8042-6a1d6ae6f7a0'; /* WAS: 'new-1ee5d84c-1ea4-4726-ba4d-291779f9c493' */
-    $data['datasets']->default_handlers['page_datasets_panel_context']->conf['display']->panels['contentmain'][1] = 'new-1ee5d84c-1ea4-4726-ba4d-291779f9c493'; /* WAS: '' */
+    $data['datasets']->default_handlers['page_datasets_panel_context']->conf['display']->panels['contentmain'][1] = 'new-263bb85d-b2bd-4d15-8042-6a1d6ae6f7a0'; /* WAS: '' */
   }
 }
 

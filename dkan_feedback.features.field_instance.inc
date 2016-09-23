@@ -10,7 +10,7 @@
 function dkan_feedback_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-feedback-body'
+  // Exported field_instance: 'node-feedback-body'.
   $field_instances['node-feedback-body'] = array(
     'bundle' => 'feedback',
     'default_value' => NULL,
@@ -23,6 +23,12 @@ function dkan_feedback_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 3,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -55,7 +61,7 @@ function dkan_feedback_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-feedback-field_contact_email'
+  // Exported field_instance: 'node-feedback-field_contact_email'.
   $field_instances['node-feedback-field_contact_email'] = array(
     'bundle' => 'feedback',
     'default_value' => NULL,
@@ -68,6 +74,12 @@ function dkan_feedback_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 2,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -95,7 +107,7 @@ function dkan_feedback_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-feedback-field_feedback_entity_reference'
+  // Exported field_instance: 'node-feedback-field_feedback_entity_reference'.
   $field_instances['node-feedback-field_feedback_entity_reference'] = array(
     'bundle' => 'feedback',
     'default_value' => NULL,
@@ -110,6 +122,12 @@ function dkan_feedback_field_default_field_instances() {
         ),
         'type' => 'entityreference_label',
         'weight' => 4,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -151,7 +169,7 @@ function dkan_feedback_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-feedback-field_feedback_type'
+  // Exported field_instance: 'node-feedback-field_feedback_type'.
   $field_instances['node-feedback-field_feedback_type'] = array(
     'bundle' => 'feedback',
     'default_value' => NULL,
@@ -164,6 +182,12 @@ function dkan_feedback_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
         'weight' => 1,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -190,7 +214,7 @@ function dkan_feedback_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-feedback-field_tags'
+  // Exported field_instance: 'node-feedback-field_tags'.
   $field_instances['node-feedback-field_tags'] = array(
     'bundle' => 'feedback',
     'default_value' => NULL,
@@ -203,6 +227,12 @@ function dkan_feedback_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 5,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -234,7 +264,7 @@ function dkan_feedback_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-feedback-og_group_ref'
+  // Exported field_instance: 'node-feedback-og_group_ref'.
   $field_instances['node-feedback-og_group_ref'] = array(
     'bundle' => 'feedback',
     'default_value' => NULL,
@@ -247,6 +277,12 @@ function dkan_feedback_field_default_field_instances() {
         'settings' => array(),
         'type' => 'og_list_default',
         'weight' => 6,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'above',

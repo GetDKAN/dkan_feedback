@@ -125,7 +125,7 @@ function dkan_feedback_form_alter(&$form, &$form_state, $form_id) {
 /**
  * Node feedback submit callback.
  */
-function dkan_feedback_submit(&$form, &$form_state) {
+function dkan_feedback_submit(&$form, &$form_state, $form_id) {
   $_GET['destination'] = '/feedback';
 }
 
@@ -204,6 +204,7 @@ function theme_feedback_profile_badge($variables) {
  * Preprocess function for the feedback template.
  */
 function dkan_feedback_preprocess_rate_template_feedback(&$variables) {
+  drupal_add_css(drupal_get_path('module', 'dkan_feedback') . '/templates/feedback/feedback.css');
   extract($variables);
   $up_classes = 'fa fa-angle-up';
   $down_classes = 'fa fa-angle-down';
@@ -285,19 +286,4 @@ function dkan_feedback_workbench_moderation_states_next_alter(&$states, &$curren
     && isset(workbench_moderation_states()['needs_review'])) {
       $states = array('needs_review' => "Needs Review");
     }
-}
-
-/**
- * Implements hook_strongarm_alter().
- *
- */
-
-function dkan_feedback_strongarm_alter(&$data) {
-  if (isset($data['rate_widgets'] )) {
-    foreach ($data['rate_widgets']-> value as $key => $value) {
-      if ($value->name == 'feedback') {
-        $value->css = drupal_get_path('module', 'dkan_feedback') . '/templates/feedback/feedback.css';
-      }
-    }
-  }
 }

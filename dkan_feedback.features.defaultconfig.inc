@@ -25,7 +25,7 @@ function dkan_feedback_defaultconfig_field_default_fields() {
   $fields['node-feedback-og_group_ref'] = array(
     'field_config' => array(
       'active' => 1,
-      'cardinality' => 2,
+      'cardinality' => -1,
       'deleted' => 0,
       'entity_types' => array(),
       'field_name' => 'og_group_ref',
@@ -52,7 +52,7 @@ function dkan_feedback_defaultconfig_field_default_fields() {
               'status' => TRUE,
             ),
             'views-select-list' => array(
-              'status' => 0,
+              'status' => 1,
             ),
           ),
           'membership_type' => 'og_membership_type_default',
@@ -83,6 +83,12 @@ function dkan_feedback_defaultconfig_field_default_fields() {
           'settings' => array(),
           'type' => 'og_list_default',
           'weight' => 6,
+        ),
+        'search_result' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
         ),
         'teaser' => array(
           'label' => 'above',
