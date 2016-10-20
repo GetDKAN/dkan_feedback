@@ -120,7 +120,7 @@ function dkan_feedback_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_feedback_entity_reference',
-    'label' => 'Associated Content',
+    'label' => 'Dataset',
     'required' => 0,
     'settings' => array(
       'behaviors' => array(
@@ -257,7 +257,7 @@ function dkan_feedback_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'og_group_ref',
-    'label' => 'Groups audience',
+    'label' => 'Agency',
     'required' => 0,
     'settings' => array(
       'behaviors' => array(
@@ -297,11 +297,11 @@ function dkan_feedback_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Associated Content');
+  t('Dataset');
   t('Email');
   t('Feedback');
   t('Feedback Type');
-  t('Groups audience');
+  t('Agency');
   t('If this feedback is related to a dataset or resource, type its name here.');
   t('Tags');
 

@@ -93,7 +93,7 @@ function dkan_feedback_defaultconfig_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'og_group_ref',
-      'label' => 'Groups audience',
+      'label' => 'Agency',
       'required' => 0,
       'settings' => array(
         'behaviors' => array(
@@ -134,7 +134,7 @@ function dkan_feedback_defaultconfig_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Groups audience');
+  t('Agency');
 
   return $fields;
 }
