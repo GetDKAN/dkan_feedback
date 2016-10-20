@@ -325,11 +325,10 @@ function dkan_feedback_mail_alter(&$message) {
     if (isset($feedback_node->field_contact_email['und'][0]['value']) && $email = $feedback_node->field_contact_email['und'][0]['value']) {
       if (isset($message['body']['0'])) {
         $message['body'][0] = dkan_feedback_workbench_moderation_email_default();
-        }
+      }
       $message['to'] = $email;
       $pattern = '/\[author:name\]/';
       $message['body']['0'] = preg_replace($pattern, $email, $message['body']['0']);
-      }
     }
   }
 }
