@@ -68,7 +68,6 @@ function dkan_feedback_permissions_user_default_permissions() {
     'name' => 'edit own comments',
     'roles' => array(
       'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
@@ -89,7 +88,16 @@ function dkan_feedback_permissions_user_default_permissions() {
     'name' => 'post comments',
     'roles' => array(
       'administrator' => 'administrator',
-      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'comment',
+  );
+
+  // Exported permission: 'skip comment approval'.
+  $permissions['skip comment approval'] = array(
+    'name' => 'skip comment approval',
+    'roles' => array(
+      'administrator' => 'administrator',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'comment',
