@@ -10,7 +10,7 @@
 function dkan_feedback_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_feedback_entity_reference'
+  // Exported field_base: 'field_feedback_entity_reference'.
   $field_bases['field_feedback_entity_reference'] = array(
     'active' => 1,
     'cardinality' => 1,
@@ -46,7 +46,7 @@ function dkan_feedback_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_feedback_type'
+  // Exported field_base: 'field_feedback_type'.
   $field_bases['field_feedback_type'] = array(
     'active' => 1,
     'cardinality' => 1,
