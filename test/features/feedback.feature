@@ -68,7 +68,7 @@ Feature: Tests for the "Feedback" features.
     And I should see "1" search results shown on the page in the "feedback" search form
     And I should see "Feedback 01" in the search results in the "feedback" search form
 
-  @api @wip
+  @api @javascript
   Scenario: As a user, I should be able to filter feedback in the Feedback page.
     Given groups:
       | title    |
@@ -100,13 +100,13 @@ Feature: Tests for the "Feedback" features.
     When I go to "/feedback"
     And I select "Group 02" from "Agency"
     And I press the "Apply" button
-    And I should see "1" search results shown on the page
-    And I should see "Feedback 02" in the search results
+    And I should see "1" search results shown on the page in the "feedback" search form
+    And I should see "Feedback 02" in the search results in the "feedback" search form
     When I go to "/feedback"
     And I select "Test feedback type 3" from "Feedback Type"
     And I press the "Apply" button
-    And I should see "1" search results shown on the page
-    And I should see "Feedback 03" in the search results
+    And I should see "1" search results shown on the page in the "feedback" search form
+    And I should see "Feedback 03" in the search results in the "feedback" search form
 
   @api @javascript
   Scenario: As Anonymous, I should be able to vote up or vote down Feedback
@@ -235,7 +235,7 @@ Feature: Tests for the "Feedback" features.
     And I press the "Apply" button
     Then the ".views-table tr td > a" elements should be sorted in this order "Feedback 01 > Feedback 02 > Feedback 03"
 
-  @api @disablecaptcha @wip
+  @api @disablecaptcha
   Scenario: As an Authenticated User, I should be able to comment on a feedback
     Given groups:
       | title    |
@@ -256,10 +256,11 @@ Feature: Tests for the "Feedback" features.
     And I fill in "Subject" with "Subject 1"
     And I fill in "Comment" with "Comment 1"
     And I press the "Save" button
-    Then I should see the success message "Your comment has been queued for review by site administrators and will be published after approval."
-    # And I should see the text "Subject 1"
-    # And I should see the text "Comment 1"
+    Then I should see the success message "Your comment has been posted."
+    And I should see the text "Subject 1"
+    And I should see the text "Comment 1"
 
+  # This scenario is obsolete because authenticated users cannot delete own comments.
   @api @disablecaptcha @wip
   Scenario: As an Authenticated User, I should be able to delete my comments on feedback
     Given groups:
@@ -281,9 +282,9 @@ Feature: Tests for the "Feedback" features.
     And I fill in "Subject" with "Subject 1"
     And I fill in "Comment" with "Comment 1"
     And I press the "Save" button
-    # And I visit the link "#comments .links.inline .comment-delete.first a"
-    # And I press the "Delete" button
-    # Then I should see the success message "The comment and all its replies have been deleted."
+    And I visit the link "#comments .links.inline .comment-delete.first a"
+    And I press the "Delete" button
+    Then I should see the success message "The comment and all its replies have been deleted."
 
   @api @disablecaptcha
   Scenario: As Anonymous, I should see a badge/icon next to feedback submitted by Authenticated Users
