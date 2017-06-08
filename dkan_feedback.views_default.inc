@@ -330,6 +330,11 @@ function dkan_feedback_views_default_views() {
   $handler->display->display_options['filters']['og_group_ref_target_id']['id'] = 'og_group_ref_target_id';
   $handler->display->display_options['filters']['og_group_ref_target_id']['table'] = 'og_membership';
   $handler->display->display_options['filters']['og_group_ref_target_id']['field'] = 'og_group_ref_target_id';
+  $handler->display->display_options['filters']['og_group_ref_target_id']['value'] = array(
+    1 => '1',
+    2 => '2',
+    3 => '3',
+  );
   $handler->display->display_options['filters']['og_group_ref_target_id']['exposed'] = TRUE;
   $handler->display->display_options['filters']['og_group_ref_target_id']['expose']['operator_id'] = 'og_group_ref_target_id_op';
   $handler->display->display_options['filters']['og_group_ref_target_id']['expose']['label'] = 'Agency';
@@ -337,15 +342,16 @@ function dkan_feedback_views_default_views() {
   $handler->display->display_options['filters']['og_group_ref_target_id']['expose']['identifier'] = 'og_group_ref_target_id';
   $handler->display->display_options['filters']['og_group_ref_target_id']['expose']['remember_roles'] = array(
     2 => '2',
+    3 => 0,
     1 => 0,
-    200153887 => 0,
-    30037204 => 0,
-    210394380 => 0,
-    210770034 => 0,
-    190180509 => 0,
-    169051924 => 0,
-    57821158 => 0,
+    5 => 0,
+    8 => 0,
+    7 => 0,
+    9 => 0,
+    4 => 0,
+    6 => 0,
   );
+  $handler->display->display_options['filters']['og_group_ref_target_id']['expose']['reduce'] = TRUE;
   $handler->display->display_options['filters']['og_group_ref_target_id']['group_info']['label'] = 'Groups audience (og_group_ref)';
   $handler->display->display_options['filters']['og_group_ref_target_id']['group_info']['identifier'] = 'og_group_ref_target_id';
   $handler->display->display_options['filters']['og_group_ref_target_id']['group_info']['remember'] = FALSE;
@@ -430,7 +436,7 @@ function dkan_feedback_views_default_views() {
   $handler->display->display_options['sorts']['value_type']['relationship'] = 'votingapi_cache';
   $handler->display->display_options['sorts']['value_type']['order'] = 'DESC';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content: Associated Content (field_feedback_entity_reference) */
+  /* Contextual filter: Content: Dataset (field_feedback_entity_reference) */
   $handler->display->display_options['arguments']['field_feedback_entity_reference_target_id']['id'] = 'field_feedback_entity_reference_target_id';
   $handler->display->display_options['arguments']['field_feedback_entity_reference_target_id']['table'] = 'field_data_field_feedback_entity_reference';
   $handler->display->display_options['arguments']['field_feedback_entity_reference_target_id']['field'] = 'field_feedback_entity_reference_target_id';
