@@ -330,11 +330,6 @@ function dkan_feedback_views_default_views() {
   $handler->display->display_options['filters']['og_group_ref_target_id']['id'] = 'og_group_ref_target_id';
   $handler->display->display_options['filters']['og_group_ref_target_id']['table'] = 'og_membership';
   $handler->display->display_options['filters']['og_group_ref_target_id']['field'] = 'og_group_ref_target_id';
-  $handler->display->display_options['filters']['og_group_ref_target_id']['value'] = array(
-    1 => '1',
-    2 => '2',
-    3 => '3',
-  );
   $handler->display->display_options['filters']['og_group_ref_target_id']['exposed'] = TRUE;
   $handler->display->display_options['filters']['og_group_ref_target_id']['expose']['operator_id'] = 'og_group_ref_target_id_op';
   $handler->display->display_options['filters']['og_group_ref_target_id']['expose']['label'] = 'Agency';
@@ -351,7 +346,6 @@ function dkan_feedback_views_default_views() {
     4 => 0,
     6 => 0,
   );
-  $handler->display->display_options['filters']['og_group_ref_target_id']['expose']['reduce'] = TRUE;
   $handler->display->display_options['filters']['og_group_ref_target_id']['group_info']['label'] = 'Groups audience (og_group_ref)';
   $handler->display->display_options['filters']['og_group_ref_target_id']['group_info']['identifier'] = 'og_group_ref_target_id';
   $handler->display->display_options['filters']['og_group_ref_target_id']['group_info']['remember'] = FALSE;
