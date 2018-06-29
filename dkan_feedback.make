@@ -6,4 +6,4 @@ projects[rate][version] = 1.7
 projects[votingapi][version] = 2.12
 
 ; Captcha module.
-projects[captcha][version] = 1.3
+projects[captcha][version] = 1.5
