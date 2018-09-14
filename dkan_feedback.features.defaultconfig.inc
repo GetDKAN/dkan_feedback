@@ -52,7 +52,7 @@ function dkan_feedback_defaultconfig_field_default_fields() {
               'status' => TRUE,
             ),
             'views-select-list' => array(
-              'status' => 0,
+              'status' => 1,
             ),
           ),
           'membership_type' => 'og_membership_type_default',
@@ -83,6 +83,12 @@ function dkan_feedback_defaultconfig_field_default_fields() {
           'settings' => array(),
           'type' => 'og_list_default',
           'weight' => 6,
+        ),
+        'search_result' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
         ),
         'teaser' => array(
           'label' => 'above',

@@ -68,11 +68,18 @@ function dkan_feedback_menu_local_tasks_alter(&$data, $router, $root_path) {
  * Access callback function for "Add Feedback" menu tab.
  */
 function dkan_feedback_access_tab($nid) {
+  $types_allowed = array(
+    'dataset',
+  );
+
   $node = node_load($nid);
-  if ($node) {
-    return $node->type != 'feedback';
+
+  if (!empty($node)) {
+    return in_array($node->type, $types_allowed);
   }
-  return TRUE;
+
+  // Default behaviour: hide the menu.
+  return FALSE;
 }
 
 /**

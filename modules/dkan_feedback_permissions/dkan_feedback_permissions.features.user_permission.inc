@@ -95,5 +95,15 @@ function dkan_feedback_permissions_user_default_permissions() {
     'module' => 'comment',
   );
 
+  // Exported permission: 'skip comment approval'.
+  $permissions['skip comment approval'] = array(
+    'name' => 'skip comment approval',
+    'roles' => array(
+      'administrator' => 'administrator',
+      'authenticated user' => 'authenticated user',
+    ),
+    'module' => 'comment',
+  );
+
   return $permissions;
 }

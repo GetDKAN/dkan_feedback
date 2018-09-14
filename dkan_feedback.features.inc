@@ -78,8 +78,8 @@ function dkan_feedback_default_page_manager_pages_alter(&$data) {
           'configuration' => array(
             'admin_title' => '',
             'title' => '',
-            'body' => '<p>Don\'t see what you\'re looking for?</p>
-            <a href="/feedback/add" class="btn btn-primary btn-sm"><i class="fa fa-lg fa-"></i> Add Feedback</a>',
+            'body' => '<p>' . t("Don't see what you're looking for?") . '</p>
+            <a href="/feedback/add" class="btn btn-primary btn-sm"><i class="fa fa-lg fa-"></i>' . t("Add Feedback") . '</a>',
             'format' => 'full_html',
             'substitute' => TRUE,
           ),
