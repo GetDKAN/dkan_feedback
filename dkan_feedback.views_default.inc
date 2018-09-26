@@ -285,6 +285,13 @@ function dkan_feedback_views_default_views() {
   $handler->display->display_options['fields']['delete_node']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['delete_node']['hide_empty'] = TRUE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['sorts']['created']['exposed'] = TRUE;
+  $handler->display->display_options['sorts']['created']['expose']['label'] = 'Most Recent';
   /* Sort criterion: Vote results: Value */
   $handler->display->display_options['sorts']['value']['id'] = 'value';
   $handler->display->display_options['sorts']['value']['table'] = 'votingapi_cache';
@@ -295,12 +302,6 @@ function dkan_feedback_views_default_views() {
   $handler->display->display_options['sorts']['value']['exposed'] = TRUE;
   $handler->display->display_options['sorts']['value']['expose']['label'] = 'Most Voted';
   $handler->display->display_options['sorts']['value']['coalesce'] = 1;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['exposed'] = TRUE;
-  $handler->display->display_options['sorts']['created']['expose']['label'] = 'Most Recent';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
