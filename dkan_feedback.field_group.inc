@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * dkan_feedback.field_group.inc
@@ -25,10 +26,9 @@ function dkan_feedback_field_group_info() {
     'children' => array(
       0 => 'og_group_ref',
       1 => 'body',
-      2 => 'field_contact_email',
-      3 => 'field_feedback_entity_reference',
-      4 => 'field_feedback_type',
-      5 => 'field_tags',
+      2 => 'field_feedback_entity_reference',
+      3 => 'field_feedback_type',
+      4 => 'field_tags',
     ),
     'format_type' => 'table',
     'format_settings' => array(

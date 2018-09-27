@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * dkan_feedback.captcha.inc
