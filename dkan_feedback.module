@@ -297,3 +297,28 @@ function dkan_feedback_strongarm_alter(&$data) {
 function dkan_feedback_page_alter(&$page) {
   drupal_add_css(drupal_get_path('module', 'dkan_feedback') . '/templates/feedback/feedback.css');
 }
+
+/**
+ * Implements hook_action_info().
+ */
+function dkan_feedback_action_info() {
+  return array(
+    'dkan_feedback_archive_feedback' => array(
+      'type' => 'node',
+      'label' => t('Archive feedback'),
+      'behavior' => array('changes_property'),
+      'configurable' => false,
+      'vbo_configurable' => false,
+      'triggers' => array('any'),
+    ),
+  );
+}
+
+/**
+ * Added vbo for archiving nodes.
+ */
+function dkan_feedback_archive_feedback(&$node, $context) {
+  if ($node->type == 'feedback') {
+    $node->archived = 1;
+  }
+}
