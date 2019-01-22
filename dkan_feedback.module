@@ -262,7 +262,6 @@ function dkan_feedback_preprocess_rate_template_feedback(&$variables) {
   $variables['info'] = implode(' ', $info);
 }
 
-
 /**
  * Implements hook_preprocess_THEME().
  */
@@ -275,23 +274,6 @@ function dkan_feedback_preprocess_views_view_table(&$vars) {
       }
     }
   }
-}
-/**
- * Implements hook_workbench_moderation_states_next_alter().
- *
- */
-function dkan_feedback_workbench_moderation_states_next_alter(&$states, &$current_state, $context) {
-
-  // Make sure new feedback nodes moderation state is set to needs_review.
-  // We do have the default state for feedback content type set to needs_review.
-  // But this is needed for users that don't have the 'moderate content from
-  // draft to needs_review' permission.
-  if ($context['node']->type == 'feedback'
-    && !isset($context['node']->nid)
-    && empty($states)
-    && isset(workbench_moderation_states()['needs_review'])) {
-      $states = array('needs_review' => "Needs Review");
-    }
 }
 
 /**
@@ -314,35 +296,4 @@ function dkan_feedback_strongarm_alter(&$data) {
  */
 function dkan_feedback_page_alter(&$page) {
   drupal_add_css(drupal_get_path('module', 'dkan_feedback') . '/templates/feedback/feedback.css');
-}
-
-/**
- * Impelments hook_form_alter().
- */
-function dkan_feedback_mail_alter(&$message) {
-  // This is designed to make workbench moderation work with anonymous users.
-  // Anons don't have a user->email address so we provide one from the feedback form.
-  // Anons don't have a user:name token available so we switch it out here.
-  // TODO: get dkan_feedback_workbench_moderation_email_default() from DKAN Workflow.
-  if ($message['id'] == 'workbench_email_we_transition'
-    && !$message['to']
-    && isset($message['params']['node']->type)
-    && $message['params']['node']->type == 'feedback') {
-    $feedback_node = $message['params']['node'];
-    if (isset($feedback_node->field_contact_email['und'][0]['value']) && $email = $feedback_node->field_contact_email['und'][0]['value']) {
-      if (isset($message['body']['0'])) {
-        $message['body'][0] = dkan_feedback_workbench_moderation_email_default();
-      }
-      $message['to'] = $email;
-      $pattern = '/\[author:name\]/';
-      $message['body']['0'] = preg_replace($pattern, $email, $message['body']['0']);
-    }
-  }
-}
-
-/**
- * DKAN Feedback moderation email default.
- */
-function dkan_feedback_workbench_moderation_email_default() {
-  return '[author:name], Your [node:content-type] "[node:title]" has been submitted for review. A Moderator or Supervisor will review the content and publish if appropriate';
 }
