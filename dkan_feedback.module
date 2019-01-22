@@ -31,6 +31,39 @@ function dkan_feedback_menu() {
     'weight' => 100,
   ];
 
+  $items['admin/content/feedback'] = array(
+    'title' => 'Feedback',
+    'description' => 'See published feedback in the site.',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('administer content'),
+    'weight' => 0,
+    'type' => MENU_LOCAL_TASK | MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/content/feedback/published'] = array(
+    'title' => 'Published Feedback',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+
+  $items['admin/content/feedback/unpublished'] = array(
+    'title' => 'Unpublished Feedback',
+    'description' => 'See unpublished feedback in the site.',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('administer content'),
+    'weight' => 1,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['admin/content/feedback/archived'] = array(
+    'title' => 'Archived Feedback',
+    'description' => 'See archived feedback in the site.',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('administer content'),
+    'weight' => 2,
+    'type' => MENU_LOCAL_TASK,
+  );
+
   return $items;
 }
 
@@ -151,7 +184,6 @@ function dkan_feedback_node_presave($node) {
     }
   }
 }
-
 
 /**
  * Implements hook_rate_templates().
