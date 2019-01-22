@@ -311,14 +311,31 @@ function dkan_feedback_action_info() {
       'vbo_configurable' => false,
       'triggers' => array('any'),
     ),
+    'dkan_feedback_unarchive_feedback' => array(
+      'type' => 'node',
+      'label' => t('Unarchive feedback'),
+      'behavior' => array('changes_property'),
+      'configurable' => false,
+      'vbo_configurable' => false,
+      'triggers' => array('any'),
+    ),
   );
 }
 
 /**
- * Added vbo for archiving nodes.
+ * Added vbo function for archiving nodes.
  */
 function dkan_feedback_archive_feedback(&$node, $context) {
   if ($node->type == 'feedback') {
     $node->archived = 1;
+  }
+}
+
+/**
+ * Added vbo function for unarchiving nodes.
+ */
+function dkan_feedback_unarchive_feedback(&$node, $context) {
+  if ($node->type == 'feedback') {
+    $node->archived = 0;
   }
 }
