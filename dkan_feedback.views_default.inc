@@ -31,9 +31,50 @@ function dkan_feedback_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '25';
-  $handler->display->display_options['style_plugin'] = 'responsive_grid';
-  $handler->display->display_options['style_options']['columns'] = '2';
-  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'views_bulk_operations' => 'views_bulk_operations',
+    'title' => 'title',
+    'body' => 'body',
+    'field_feedback_type' => 'field_feedback_type',
+    'changed' => 'changed',
+  );
+  $handler->display->display_options['style_options']['default'] = 'changed';
+  $handler->display->display_options['style_options']['info'] = array(
+    'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'body' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_feedback_type' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
   /* Field: Bulk operations: Content */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'views_entity_node';
