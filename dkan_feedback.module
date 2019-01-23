@@ -48,6 +48,7 @@ function dkan_feedback_menu() {
 
   $items['admin/content/feedback/unpublished'] = array(
     'title' => 'Unpublished Feedback',
+    'title callback' => 'dkan_feedback_unpublished_count',
     'description' => 'See unpublished feedback in the site.',
     'page callback' => 'system_admin_menu_block_page',
     'access arguments' => array('administer content'),
@@ -57,6 +58,7 @@ function dkan_feedback_menu() {
 
   $items['admin/content/feedback/archived'] = array(
     'title' => 'Archived Feedback',
+    'title callback' => 'dkan_feedback_archived_count',
     'description' => 'See archived feedback in the site.',
     'page callback' => 'system_admin_menu_block_page',
     'access arguments' => array('administer content'),
@@ -65,6 +67,22 @@ function dkan_feedback_menu() {
   );
 
   return $items;
+}
+
+/**
+ * Returns a menu title with the number of unpublished and unarchived feedback.
+ */
+function dkan_feedback_unpublished_count() {
+  $count = db_query('SELECT COUNT(nid) FROM {node} WHERE status = 0 and archived = 0')->fetchField();
+  return t('Unpublished feedback (@count)', array('@count' => $count));
+}
+
+/**
+ * Returns a menu title with the number of unpublished and archived feedback.
+ */
+function dkan_feedback_archived_count() {
+  $count = db_query('SELECT COUNT(nid) FROM {node} WHERE status = 0 and archived = 1')->fetchField();
+  return t('Archived feedback (@count)', array('@count' => $count));
 }
 
 /**
