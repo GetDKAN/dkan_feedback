@@ -360,6 +360,7 @@ function dkan_feedback_action_info() {
 function dkan_feedback_archive_feedback(&$node, $context) {
   if ($node->type == 'feedback') {
     $node->archived = 1;
+    $node->status = 0;
   }
 }
 
