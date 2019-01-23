@@ -136,6 +136,13 @@ function dkan_feedback_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'node_options_feedback';
+  $strongarm->value = array();
+  $export['node_options_feedback'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_preview_feedback';
   $strongarm->value = '0';
   $export['node_preview_feedback'] = $strongarm;
