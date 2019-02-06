@@ -47,7 +47,7 @@ function dkan_feedback_field_default_field_instances() {
     'required' => 1,
     'settings' => array(
       'display_summary' => 1,
-      'text_processing' => 1,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
