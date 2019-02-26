@@ -41,3 +41,10 @@ function _dkan_feedback_type_default_terms() {
   }
   return $return;
 }
+
+/**
+ * Revert dkan_feedback to include custom pub states.
+ */
+function dkan_feedback_update_7000() {
+  features_revert_module('dkan_feedback');
+}
