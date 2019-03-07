@@ -35,6 +35,7 @@ function dkan_feedback_menu() {
     'title' => 'Feedback',
     'description' => 'See published feedback in the site.',
     'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('edit any feedback content'),
     'weight' => 0,
     'type' => MENU_LOCAL_TASK | MENU_NORMAL_ITEM,
   );
@@ -50,6 +51,7 @@ function dkan_feedback_menu() {
     'title callback' => 'dkan_feedback_unpublished_count',
     'description' => 'See unpublished feedback in the site.',
     'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('edit any feedback content'),
     'weight' => 1,
     'type' => MENU_LOCAL_TASK,
   );
@@ -59,6 +61,7 @@ function dkan_feedback_menu() {
     'title callback' => 'dkan_feedback_archived_count',
     'description' => 'See archived feedback in the site.',
     'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('edit any feedback content'),
     'weight' => 2,
     'type' => MENU_LOCAL_TASK,
   );
