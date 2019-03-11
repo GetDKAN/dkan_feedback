@@ -73,7 +73,7 @@ function dkan_feedback_menu() {
  * Returns a menu title with the number of unpublished and unarchived feedback.
  */
 function dkan_feedback_unpublished_count() {
-  $count = db_query('SELECT COUNT(nid) FROM {node} WHERE status = 0 and archived = 0')->fetchField();
+  $count = db_query("SELECT COUNT(nid) FROM {node} WHERE status = 0 and archived = 0 and type = 'feedback'")->fetchField();
   return t('Unpublished feedback (@count)', array('@count' => $count));
 }
 
@@ -81,7 +81,7 @@ function dkan_feedback_unpublished_count() {
  * Returns a menu title with the number of unpublished and archived feedback.
  */
 function dkan_feedback_archived_count() {
-  $count = db_query('SELECT COUNT(nid) FROM {node} WHERE status = 0 and archived = 1')->fetchField();
+  $count = db_query("SELECT COUNT(nid) FROM {node} WHERE status = 0 and archived = 1 and type = 'feedback'")->fetchField();
   return t('Archived feedback (@count)', array('@count' => $count));
 }
 
