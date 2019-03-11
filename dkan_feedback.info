@@ -22,6 +22,7 @@ dependencies[] = taxonomy
 dependencies[] = text
 dependencies[] = views
 dependencies[] = views_content
+dependencies[] = views_data_export
 dependencies[] = views_responsive_grid
 stylesheets[all][] = templates/feedback/feedback.css
 features[captcha_points][] = feedback_node_form

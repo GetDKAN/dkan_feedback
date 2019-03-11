@@ -375,6 +375,159 @@ function dkan_feedback_views_default_views() {
   $handler->display->display_options['filters']['archived']['field'] = 'archived';
   $handler->display->display_options['filters']['archived']['value'] = '1';
   $handler->display->display_options['path'] = 'admin/content/feedback/archived';
+
+  /* Display: Published feedback export */
+  $handler = $view->new_display('views_data_export', 'Published feedback export', 'published_feedback_export');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = 'Feedback';
+  /* Field: Content: Feedback Type */
+  $handler->display->display_options['fields']['field_feedback_type']['id'] = 'field_feedback_type';
+  $handler->display->display_options['fields']['field_feedback_type']['table'] = 'field_data_field_feedback_type';
+  $handler->display->display_options['fields']['field_feedback_type']['field'] = 'field_feedback_type';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'iso_8601_date';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'iso_8601_date';
+  $handler->display->display_options['path'] = 'published_feedback.csv';
+  $handler->display->display_options['displays'] = array(
+    'dkan_feedback_published' => 'dkan_feedback_published',
+    'default' => 0,
+    'dkan_feedback_unpublished' => 0,
+    'dkan_feedback_archived' => 0,
+  );
+  $handler->display->display_options['use_batch'] = 'batch';
+  $handler->display->display_options['segment_size'] = '100';
+
+  /* Display: Unpublished feedback export */
+  $handler = $view->new_display('views_data_export', 'Unpublished feedback export', 'unpublished_feedback_export');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Unpublished Feedback';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = 'Feedback';
+  /* Field: Content: Feedback Type */
+  $handler->display->display_options['fields']['field_feedback_type']['id'] = 'field_feedback_type';
+  $handler->display->display_options['fields']['field_feedback_type']['table'] = 'field_data_field_feedback_type';
+  $handler->display->display_options['fields']['field_feedback_type']['field'] = 'field_feedback_type';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'iso_8601_date';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'iso_8601_date';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '0';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'feedback' => 'feedback',
+  );
+  /* Filter criterion: Content: Archived */
+  $handler->display->display_options['filters']['archived']['id'] = 'archived';
+  $handler->display->display_options['filters']['archived']['table'] = 'node';
+  $handler->display->display_options['filters']['archived']['field'] = 'archived';
+  $handler->display->display_options['filters']['archived']['value'] = '0';
+  $handler->display->display_options['path'] = 'unpublished_feedback.csv';
+  $handler->display->display_options['displays'] = array(
+    'dkan_feedback_unpublished' => 'dkan_feedback_unpublished',
+    'default' => 0,
+    'dkan_feedback_published' => 0,
+    'dkan_feedback_archived' => 0,
+  );
+  $handler->display->display_options['sitename_title'] = 0;
+  $handler->display->display_options['use_batch'] = 'batch';
+  $handler->display->display_options['segment_size'] = '100';
+
+  /* Display: Archived feedback export */
+  $handler = $view->new_display('views_data_export', 'Archived feedback export', 'archived_feedback_export');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Archived Feedback';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  /* Field: Content: Description */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['label'] = 'Feedback';
+  /* Field: Content: Feedback Type */
+  $handler->display->display_options['fields']['field_feedback_type']['id'] = 'field_feedback_type';
+  $handler->display->display_options['fields']['field_feedback_type']['table'] = 'field_data_field_feedback_type';
+  $handler->display->display_options['fields']['field_feedback_type']['field'] = 'field_feedback_type';
+  /* Field: Content: Updated date */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'node';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'iso_8601_date';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'iso_8601_date';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '0';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'feedback' => 'feedback',
+  );
+  /* Filter criterion: Content: Archived */
+  $handler->display->display_options['filters']['archived']['id'] = 'archived';
+  $handler->display->display_options['filters']['archived']['table'] = 'node';
+  $handler->display->display_options['filters']['archived']['field'] = 'archived';
+  $handler->display->display_options['filters']['archived']['value'] = '1';
+  $handler->display->display_options['path'] = 'archived_feedback.csv';
+  $handler->display->display_options['displays'] = array(
+    'dkan_feedback_archived' => 'dkan_feedback_archived',
+    'default' => 0,
+    'dkan_feedback_published' => 0,
+    'dkan_feedback_unpublished' => 0,
+  );
+  $handler->display->display_options['sitename_title'] = 0;
+  $handler->display->display_options['use_batch'] = 'batch';
+  $handler->display->display_options['segment_size'] = '100';
   $export['dkan_feedback_administration'] = $view;
 
   $view = new view();
