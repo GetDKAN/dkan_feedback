@@ -115,11 +115,11 @@ function dkan_feedback_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 7,
+        'type' => 'text_plain',
+        'weight' => 6,
       ),
       'print' => array(
         'label' => 'above',
