@@ -35,6 +35,7 @@ features[field_base][] = field_feedback_type
 features[field_group][] = group_feedback|node|feedback|default
 features[field_instance][] = node-feedback-body
 features[field_instance][] = node-feedback-field_contact_email
+features[field_instance][] = node-feedback-field_contact_name
 features[field_instance][] = node-feedback-field_feedback_entity_reference
 features[field_instance][] = node-feedback-field_feedback_type
 features[field_instance][] = node-feedback-field_tags
