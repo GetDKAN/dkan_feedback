@@ -93,6 +93,10 @@ function dkan_comments_views_default_views() {
   );
   $handler->display->display_options['style_options']['sticky'] = TRUE;
   $handler->display->display_options['style_options']['empty_table'] = TRUE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
   /* No results behavior: Global: Unfiltered text */
   $handler->display->display_options['empty']['area_text_custom']['id'] = 'area_text_custom';
   $handler->display->display_options['empty']['area_text_custom']['table'] = 'views';
@@ -558,27 +562,18 @@ function dkan_comments_views_default_views() {
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Posted in';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'nodeTitle';
-  /* Filter criterion: Comment: Comment publish status. */
-  $handler->display->display_options['filters']['comment_status']['id'] = 'comment_status';
-  $handler->display->display_options['filters']['comment_status']['table'] = 'field_data_comment_archived';
-  $handler->display->display_options['filters']['comment_status']['field'] = 'comment_status';
-  $handler->display->display_options['filters']['comment_status']['value'] = 'unpublished';
-  $handler->display->display_options['filters']['comment_status']['expose']['operator_id'] = 'comment_status_op';
-  $handler->display->display_options['filters']['comment_status']['expose']['label'] = 'Status';
-  $handler->display->display_options['filters']['comment_status']['expose']['operator'] = 'comment_status_op';
-  $handler->display->display_options['filters']['comment_status']['expose']['identifier'] = 'comment_status';
-  $handler->display->display_options['filters']['comment_status']['expose']['required'] = TRUE;
-  $handler->display->display_options['filters']['comment_status']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['comment_status']['expose']['remember_roles'] = array(
-    2 => '2',
-    3 => 0,
-    1 => 0,
-    5 => 0,
-    7 => 0,
-    8 => 0,
-    9 => 0,
-    4 => 0,
-    6 => 0,
+  /* Filter criterion: Comment: Approved */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'comment';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '0';
+  /* Filter criterion: Comment: Archived (comment_archived) */
+  $handler->display->display_options['filters']['comment_archived_value']['id'] = 'comment_archived_value';
+  $handler->display->display_options['filters']['comment_archived_value']['table'] = 'field_data_comment_archived';
+  $handler->display->display_options['filters']['comment_archived_value']['field'] = 'comment_archived_value';
+  $handler->display->display_options['filters']['comment_archived_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['comment_archived_value']['value'] = array(
+    1 => '1',
   );
   $handler->display->display_options['path'] = 'admin/content/comment/approval';
 
@@ -737,6 +732,7 @@ function dkan_comments_views_default_views() {
   $handler->display->display_options['style_options']['newline_token'] = '1';
   $handler->display->display_options['style_options']['header'] = 1;
   $handler->display->display_options['style_options']['keep_html'] = 0;
+  $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Comment: Title */
   $handler->display->display_options['fields']['subject']['id'] = 'subject';
@@ -895,6 +891,7 @@ function dkan_comments_views_default_views() {
   $handler->display->display_options['style_options']['newline_token'] = '1';
   $handler->display->display_options['style_options']['header'] = 1;
   $handler->display->display_options['style_options']['keep_html'] = 0;
+  $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Comment: Title */
   $handler->display->display_options['fields']['subject']['id'] = 'subject';
@@ -1054,6 +1051,7 @@ function dkan_comments_views_default_views() {
   $handler->display->display_options['style_options']['newline_token'] = '1';
   $handler->display->display_options['style_options']['header'] = 1;
   $handler->display->display_options['style_options']['keep_html'] = 0;
+  $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Comment: Title */
   $handler->display->display_options['fields']['subject']['id'] = 'subject';
