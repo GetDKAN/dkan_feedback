@@ -31,7 +31,58 @@ function dkan_feedback_menu() {
     'weight' => 100,
   ];
 
+  $items['admin/content/feedback'] = array(
+    'title' => 'Feedback',
+    'description' => 'See published feedback in the site.',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('edit any feedback content'),
+    'weight' => 0,
+    'type' => MENU_LOCAL_TASK | MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/content/feedback/published'] = array(
+    'title' => 'Published Feedback',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 0,
+  );
+
+  $items['admin/content/feedback/unpublished'] = array(
+    'title' => 'Unpublished Feedback',
+    'title callback' => 'dkan_feedback_unpublished_count',
+    'description' => 'See unpublished feedback in the site.',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('edit any feedback content'),
+    'weight' => 1,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['admin/content/feedback/archived'] = array(
+    'title' => 'Archived Feedback',
+    'title callback' => 'dkan_feedback_archived_count',
+    'description' => 'See archived feedback in the site.',
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('edit any feedback content'),
+    'weight' => 2,
+    'type' => MENU_LOCAL_TASK,
+  );
+
   return $items;
+}
+
+/**
+ * Returns a menu title with the number of unpublished and unarchived feedback.
+ */
+function dkan_feedback_unpublished_count() {
+  $count = db_query("SELECT COUNT(nid) FROM {node} WHERE status = 0 and archived = 0 and type = 'feedback'")->fetchField();
+  return t('Unpublished feedback (@count)', array('@count' => $count));
+}
+
+/**
+ * Returns a menu title with the number of unpublished and archived feedback.
+ */
+function dkan_feedback_archived_count() {
+  $count = db_query("SELECT COUNT(nid) FROM {node} WHERE status = 0 and archived = 1 and type = 'feedback'")->fetchField();
+  return t('Archived feedback (@count)', array('@count' => $count));
 }
 
 /**
@@ -154,7 +205,6 @@ function dkan_feedback_node_presave($node) {
   }
 }
 
-
 /**
  * Implements hook_rate_templates().
  */
@@ -264,7 +314,6 @@ function dkan_feedback_preprocess_rate_template_feedback(&$variables) {
   $variables['info'] = implode(' ', $info);
 }
 
-
 /**
  * Implements hook_preprocess_THEME().
  */
@@ -277,23 +326,6 @@ function dkan_feedback_preprocess_views_view_table(&$vars) {
       }
     }
   }
-}
-/**
- * Implements hook_workbench_moderation_states_next_alter().
- *
- */
-function dkan_feedback_workbench_moderation_states_next_alter(&$states, &$current_state, $context) {
-
-  // Make sure new feedback nodes moderation state is set to needs_review.
-  // We do have the default state for feedback content type set to needs_review.
-  // But this is needed for users that don't have the 'moderate content from
-  // draft to needs_review' permission.
-  if ($context['node']->type == 'feedback'
-    && !isset($context['node']->nid)
-    && empty($states)
-    && isset(workbench_moderation_states()['needs_review'])) {
-      $states = array('needs_review' => "Needs Review");
-    }
 }
 
 /**
@@ -319,32 +351,44 @@ function dkan_feedback_page_alter(&$page) {
 }
 
 /**
- * Impelments hook_form_alter().
+ * Implements hook_action_info().
  */
-function dkan_feedback_mail_alter(&$message) {
-  // This is designed to make workbench moderation work with anonymous users.
-  // Anons don't have a user->email address so we provide one from the feedback form.
-  // Anons don't have a user:name token available so we switch it out here.
-  // TODO: get dkan_feedback_workbench_moderation_email_default() from DKAN Workflow.
-  if ($message['id'] == 'workbench_email_we_transition'
-    && !$message['to']
-    && isset($message['params']['node']->type)
-    && $message['params']['node']->type == 'feedback') {
-    $feedback_node = $message['params']['node'];
-    if (isset($feedback_node->field_contact_email['und'][0]['value']) && $email = $feedback_node->field_contact_email['und'][0]['value']) {
-      if (isset($message['body']['0'])) {
-        $message['body'][0] = dkan_feedback_workbench_moderation_email_default();
-      }
-      $message['to'] = $email;
-      $pattern = '/\[author:name\]/';
-      $message['body']['0'] = preg_replace($pattern, $email, $message['body']['0']);
-    }
+function dkan_feedback_action_info() {
+  return array(
+    'dkan_feedback_archive_feedback' => array(
+      'type' => 'node',
+      'label' => t('Archive feedback'),
+      'behavior' => array('changes_property'),
+      'configurable' => false,
+      'vbo_configurable' => false,
+      'triggers' => array('any'),
+    ),
+    'dkan_feedback_unarchive_feedback' => array(
+      'type' => 'node',
+      'label' => t('Unarchive feedback'),
+      'behavior' => array('changes_property'),
+      'configurable' => false,
+      'vbo_configurable' => false,
+      'triggers' => array('any'),
+    ),
+  );
+}
+
+/**
+ * Added vbo function for archiving nodes.
+ */
+function dkan_feedback_archive_feedback(&$node, $context) {
+  if ($node->type == 'feedback') {
+    $node->archived = 1;
+    $node->status = 0;
   }
 }
 
 /**
- * DKAN Feedback moderation email default.
+ * Added vbo function for unarchiving nodes.
  */
-function dkan_feedback_workbench_moderation_email_default() {
-  return '[author:name], Your [node:content-type] "[node:title]" has been submitted for review. A Moderator or Supervisor will review the content and publish if appropriate';
+function dkan_feedback_unarchive_feedback(&$node, $context) {
+  if ($node->type == 'feedback') {
+    $node->archived = 0;
+  }
 }

@@ -9,6 +9,8 @@
  */
 function dkan_feedback_install() {
   _dkan_feedback_type_default_terms();
+  $modules = array('dkan_feedback_permissions', 'dkan_comments');
+  module_enable($modules);
 }
 
 /**
@@ -40,4 +42,11 @@ function _dkan_feedback_type_default_terms() {
     $return[$term->name] = $term;
   }
   return $return;
+}
+
+/**
+ * Revert dkan_feedback to include custom pub states.
+ */
+function dkan_feedback_update_7000() {
+  features_revert_module('dkan_feedback');
 }
