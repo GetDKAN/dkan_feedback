@@ -170,6 +170,9 @@ function dkan_feedback_form_alter(&$form, &$form_state, $form_id) {
     if (!$user->uid) {
       $form['actions']['submit']['#access'] = TRUE;
       $form['actions']['preview']['#access'] = FALSE;
+    } else {
+      $form['field_contact_name'][LANGUAGE_NONE][0]['value']['#default_value'] = $user->name;
+      $form['field_contact_email'][LANGUAGE_NONE][0]['value']['#default_value'] = $user->mail;
     }
     $not_og_ref_validate = function($value) {
       return $value != 'og_form_group_reference_validate';

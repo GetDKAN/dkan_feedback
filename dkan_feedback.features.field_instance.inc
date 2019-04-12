@@ -142,6 +142,58 @@ function dkan_feedback_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-feedback-field_contact_name'.
+  $field_instances['node-feedback-field_contact_name'] = array(
+    'bundle' => 'feedback',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_plain',
+        'weight' => 6,
+      ),
+      'print' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_contact_name',
+    'label' => 'Contact Name',
+    'required' => 1,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'node-feedback-field_feedback_entity_reference'.
   $field_instances['node-feedback-field_feedback_entity_reference'] = array(
     'bundle' => 'feedback',
@@ -369,6 +421,7 @@ function dkan_feedback_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Agency');
+  t('Contact Name');
   t('Comment');
   t('Dataset');
   t('Email');
