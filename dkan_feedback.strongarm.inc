@@ -15,7 +15,7 @@ function dkan_feedback_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_feedback';
-  $strongarm->value = 0;
+  $strongarm->value = '0';
   $export['comment_anonymous_feedback'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -59,6 +59,27 @@ function dkan_feedback_strongarm() {
   $strongarm->name = 'comment_subject_field_feedback';
   $strongarm->value = 1;
   $export['comment_subject_field_feedback'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_enable_revisions_page_node_feedback';
+  $strongarm->value = 1;
+  $export['diff_enable_revisions_page_node_feedback'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_show_preview_changes_node_feedback';
+  $strongarm->value = 1;
+  $export['diff_show_preview_changes_node_feedback'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'diff_view_mode_preview_node_feedback';
+  $strongarm->value = 'full';
+  $export['diff_view_mode_preview_node_feedback'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -116,10 +137,7 @@ function dkan_feedback_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_options_feedback';
-  $strongarm->value = array(
-    0 => 'moderation',
-    1 => 'revision',
-  );
+  $strongarm->value = array();
   $export['node_options_feedback'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -194,13 +212,6 @@ function dkan_feedback_strongarm() {
     ),
   );
   $export['rate_widgets'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'workbench_moderation_default_state_feedback';
-  $strongarm->value = 'needs_review';
-  $export['workbench_moderation_default_state_feedback'] = $strongarm;
 
   return $export;
 }

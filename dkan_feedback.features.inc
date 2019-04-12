@@ -28,78 +28,20 @@ function dkan_feedback_views_api($module = NULL, $api = NULL) {
 }
 
 /**
- * Implements hook_field_default_field_bases_alter().
+ * Implements hook_custom_pub_defaults().
  */
-function dkan_feedback_field_default_field_bases_alter(&$data) {
-  if (isset($data['og_group_ref'])) {
-    $data['og_group_ref']['settings']['handler_settings']['behaviors']['views-select-list']['status'] = 1; /* WAS: 0 */
-  }
-}
+function dkan_feedback_custom_pub_defaults() {
+  $options = array();
+  // Exported option: archived
+  $options['archived'] = array(
+    'type' => 'archived',
+    'name' => t('Archived'),
+    'node_types' => array(
+      'feedback' => t('Feedback'),
+    ),
+  );
 
-/**
- * Implements hook_default_page_manager_handlers_alter().
- */
-function dkan_feedback_default_page_manager_handlers_alter(&$data) {
-  if (isset($data['node_view_panel_context'])) {
-    $data['node_view_panel_context']->conf['display']->content['new-f1e7011f-4d87-4c82-a8eb-fe43c08bf8eb'] = (object) array(
-          'pid' => 'new-f1e7011f-4d87-4c82-a8eb-fe43c08bf8eb',
-          'panel' => 'contentmain',
-          'type' => 'views_panes',
-          'subtype' => 'feedback-panel_pane_2',
-          'shown' => TRUE,
-          'access' => array(),
-          'configuration' => array(),
-          'cache' => array(),
-          'style' => array(
-            'settings' => NULL,
-          ),
-          'css' => array(),
-          'extras' => array(),
-          'position' => 1,
-          'locks' => array(),
-          'uuid' => 'f1e7011f-4d87-4c82-a8eb-fe43c08bf8eb',
-        ); /* WAS: '' */
-    $data['node_view_panel_context']->conf['display']->panels['contentmain'][1] = 'new-f1e7011f-4d87-4c82-a8eb-fe43c08bf8eb'; /* WAS: '' */
-  }
-}
-
-/**
- * Implements hook_default_page_manager_pages_alter().
- */
-function dkan_feedback_default_page_manager_pages_alter(&$data) {
-  if (isset($data['datasets'])) {
-    $data['datasets']->default_handlers['page_datasets_panel_context']->conf['display']->content['new-1ee5d84c-1ea4-4726-ba4d-291779f9c493']->position = 1; /* WAS: 0 */
-    $data['datasets']->default_handlers['page_datasets_panel_context']->conf['display']->content['new-263bb85d-b2bd-4d15-8042-6a1d6ae6f7a0'] = (object) array(
-          'pid' => 'new-263bb85d-b2bd-4d15-8042-6a1d6ae6f7a0',
-          'panel' => 'contentmain',
-          'type' => 'custom',
-          'subtype' => 'custom',
-          'shown' => TRUE,
-          'access' => array(),
-          'configuration' => array(
-            'admin_title' => '',
-            'title' => '',
-            'body' => '<p>' . t("Don't see what you're looking for?") . '</p>
-            <a href="/feedback/add" class="btn btn-primary btn-sm"><i class="fa fa-lg fa-"></i>' . t("Add Feedback") . '</a>',
-            'format' => 'full_html',
-            'substitute' => TRUE,
-          ),
-          'cache' => array(),
-          'style' => array(
-            'settings' => NULL,
-          ),
-          'css' => array(
-            'css_id' => '',
-            'css_class' => 'feedback-submit-pane',
-          ),
-          'extras' => array(),
-          'position' => 0,
-          'locks' => array(),
-          'uuid' => '263bb85d-b2bd-4d15-8042-6a1d6ae6f7a0',
-        ); /* WAS: '' */
-    $data['datasets']->default_handlers['page_datasets_panel_context']->conf['display']->panels['contentmain'][0] = 'new-263bb85d-b2bd-4d15-8042-6a1d6ae6f7a0'; /* WAS: 'new-1ee5d84c-1ea4-4726-ba4d-291779f9c493' */
-    $data['datasets']->default_handlers['page_datasets_panel_context']->conf['display']->panels['contentmain'][1] = 'new-1ee5d84c-1ea4-4726-ba4d-291779f9c493'; /* WAS: '' */
-  }
+  return $options;
 }
 
 /**
