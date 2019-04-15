@@ -50,3 +50,14 @@ function _dkan_feedback_type_default_terms() {
 function dkan_feedback_update_7000() {
   features_revert_module('dkan_feedback');
 }
+
+/**
+ * Remove feedback nodes from workbench_moderation_node_history.
+ */
+function dkan_feedback_update_7001() {
+  db_query('DELETE FROM w
+    USING {workbench_moderation_node_history} AS w, {node} AS n
+    WHERE (w.nid = n.nid)
+    AND (w.vid = n.vid)
+    AND n.type = :type', [':type' => 'feedback']);
+}
