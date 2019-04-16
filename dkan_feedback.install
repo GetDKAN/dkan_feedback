@@ -50,3 +50,29 @@ function _dkan_feedback_type_default_terms() {
 function dkan_feedback_update_7000() {
   features_revert_module('dkan_feedback');
 }
+
+/**
+ * Remove feedback nodes from workbench_moderation_node_history.
+ */
+function dkan_feedback_update_7001() {
+  // Get a list of all feedback nodes.
+  $feedback_nids = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->condition('type', 'feedback')
+    ->execute()
+    ->fetchCol();
+
+  // Remove feedback entries from the workbench history table.
+  db_delete('workbench_moderation_node_history')
+    ->condition('nid', $feedback_nids, 'IN')
+    ->execute();
+
+  drupal_set_message(t('Removed entries for :count feedback nodes from the workbench moderation node history table.', array(':count' => count($feedback_nids))));
+}
+
+/**
+ * Remove moderation config from feedback content type.
+ */
+function dkan_feedback_update_7002() {
+  variable_del('node_options_feedback');
+}
