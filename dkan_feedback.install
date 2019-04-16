@@ -55,9 +55,27 @@ function dkan_feedback_update_7000() {
  * Remove feedback nodes from workbench_moderation_node_history.
  */
 function dkan_feedback_update_7001() {
-  db_query('DELETE FROM w
-    USING {workbench_moderation_node_history} AS w, {node} AS n
-    WHERE (w.nid = n.nid)
-    AND (w.vid = n.vid)
-    AND n.type = :type', [':type' => 'feedback']);
+  // Get a list of all feedback nodes.
+  $feedback_nids = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->condition('type', 'feedback')
+    ->execute()
+    ->fetchCol();
+
+  // Remove feedback entries from the workbench history table.
+  $count = 0;
+  foreach ($feedback_nids as $nid) {
+    db_delete('workbench_moderation_node_history')
+      ->condition('nid', $nid)
+      ->execute();
+    $count = $count + 1;
+  }
+  drupal_set_message(t('Removed :count feedback entries from the workbench moderation node history table.', array(':count' => $count)));
+}
+
+/**
+ * Remove moderation config from feedback content type.
+ */
+function dkan_feedback_update_7002() {
+  variable_del('node_options_feedback');
 }
