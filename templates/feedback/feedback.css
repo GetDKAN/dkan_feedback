@@ -128,6 +128,9 @@
 .view-feedback .views-exposed-form label {
   display: inline-block;
 }
+.view-feedback .views-exposed-form select.form-control {
+  max-width: 250px;
+}
 .view-feedback .views-exposed-form .views-exposed-widget .form-submit {
   font-size: 12px;
 }

@@ -76,3 +76,10 @@ function dkan_feedback_update_7001() {
 function dkan_feedback_update_7002() {
   variable_del('node_options_feedback');
 }
+
+/**
+ * Revert dkan_feedback to fix node options and items order.
+ */
+function dkan_feedback_update_7003() {
+  features_revert_module('dkan_feedback');
+}

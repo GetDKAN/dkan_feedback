@@ -64,7 +64,7 @@ function dkan_feedback_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'diff_enable_revisions_page_node_feedback';
-  $strongarm->value = 1;
+  $strongarm->value = 0;
   $export['diff_enable_revisions_page_node_feedback'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -132,13 +132,6 @@ function dkan_feedback_strongarm() {
   $strongarm->name = 'menu_parent_feedback';
   $strongarm->value = 'main-menu:0';
   $export['menu_parent_feedback'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_feedback';
-  $strongarm->value = array();
-  $export['node_options_feedback'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
