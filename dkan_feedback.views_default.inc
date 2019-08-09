@@ -69,7 +69,7 @@ function dkan_feedback_views_default_views() {
     ),
     'changed' => array(
       'sortable' => 0,
-      'default_sort_order' => 'asc',
+      'default_sort_order' => 'desc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
@@ -534,7 +534,7 @@ function dkan_feedback_views_default_views() {
   );
   $handler->display->display_options['sitename_title'] = 0;
   $handler->display->display_options['use_batch'] = 'batch';
-  $handler->display->display_options['segment_size'] = '100';  
+  $handler->display->display_options['segment_size'] = '100';
   $export['dkan_feedback_administration'] = $view;
 
   $view = new view();
@@ -701,7 +701,7 @@ function dkan_feedback_views_default_views() {
     ),
     'created' => array(
       'sortable' => 0,
-      'default_sort_order' => 'asc',
+      'default_sort_order' => 'desc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
