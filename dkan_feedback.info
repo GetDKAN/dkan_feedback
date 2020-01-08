@@ -3,6 +3,7 @@ description = Provide feedback for DKAN content.
 core = 7.x
 package = DKAN
 version = 7.x-0.9
+dependencies[] = admin_views
 dependencies[] = captcha
 dependencies[] = comment
 dependencies[] = ctools
