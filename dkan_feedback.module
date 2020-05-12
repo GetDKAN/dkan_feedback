@@ -284,14 +284,9 @@ function dkan_feedback_preprocess_rate_template_feedback(&$variables) {
         break;
     }
   }
-  $variables['up_button'] = theme('rate_button', [
-    'href' => $links[0]['href'],
-    'class' => $up_classes,
-  ]);
-  $variables['down_button'] = theme('rate_button', [
-    'href' => $links[1]['href'],
-    'class' => $down_classes,
-  ]);
+  $variables['up_button'] = dkan_feedback_rate_button("Upvote", $links[0]['href'], $up_classes);
+  $variables['down_button'] = dkan_feedback_rate_button("Downvote", $links[1]['href'], $down_classes);
+
   if ($results['rating'] > 0) {
     $score = '+' . $results['rating'];
     $score_class = 'positive';
@@ -319,6 +314,31 @@ function dkan_feedback_preprocess_rate_template_feedback(&$variables) {
     }
   }
   $variables['info'] = implode(' ', $info);
+}
+
+/**
+ * Helper function for building accessible up/down link.
+ *
+ * Based on theme_rate_button from module rate.
+ */
+function dkan_feedback_rate_button($text, $href, $class) {
+  static $id = 0;
+  $id++;
+
+  $classes = 'rate-button';
+  if ($class) {
+    $classes .= ' ' . $class;
+  }
+  if (empty($href)) {
+    // Widget is disabled or closed.
+    return '<span class="' . $classes . '" id="rate-button-' . $id . '">' .
+      check_plain($text) .
+      '</span>';
+  } else {
+    return '<a class="' . $classes . '" id="rate-button-' . $id . '" rel="nofollow" href="' . htmlentities($href) . '" title="' . check_plain($text) . '">' .
+        '<span class="sr-only">' . check_plain($text) . '</span>' .
+      '</a>';
+  }
 }
 
 /**
